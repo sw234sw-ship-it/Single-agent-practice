@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f1e8" />
+    <title>Cash Arc | 미니멀 가계부</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <a class="skip-link" href="#mainContent">본문으로 바로가기</a>
+    <main class="layout" id="mainContent">
+      <header class="hero">
+        <p class="eyebrow">Single Agent Finance</p>
+        <h1>Cash Arc</h1>
+        <p class="subtitle">
+          고정 수입, 추가 수입, 지출을 한 화면에서 관리하고 월별 잉여 자본 성장률을 확인하세요.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-open-modal="settingsModal">기본 설정</button>
+          <button class="btn" data-open-modal="entryModal">수입/지출 입력</button>
+          <button class="btn" data-open-modal="analysisModal">현금흐름 분석</button>
+        </div>
+      </header>
+
+      <section class="kpis" aria-label="핵심 지표">
+        <article class="kpi-card">
+          <p class="label">현재 누적 자본</p>
+          <p id="kpiCurrentCapital" class="value">₩0</p>
+        </article>
+        <article class="kpi-card">
+          <p class="label">최근 월 순흐름</p>
+          <p id="kpiLatestNet" class="value">₩0</p>
+        </article>
+        <article class="kpi-card">
+          <p class="label">누적 성장률</p>
+          <p id="kpiTotalGrowth" class="value">0%</p>
+        </article>
+        <article class="kpi-card">
+          <p class="label">월 고정 수입</p>
+          <p id="kpiFixedIncome" class="value">₩0</p>
+        </article>
+      </section>
+
+      <section class="sheet" aria-label="월별 현황">
+        <div class="sheet-head">
+          <h2>월별 현금흐름</h2>
+          <button id="addMonthButton" class="btn btn-ghost">월 추가</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <caption class="sr-only">
+              월별 시작 자본, 수입, 지출, 잉여 자본, 성장률, 누적 자본 테이블
+            </caption>
+            <thead>
+              <tr>
+                <th>월</th>
+                <th>시작 자본</th>
+                <th>총 수입</th>
+                <th>총 지출</th>
+                <th>잉여 자본</th>
+                <th>자본 성장률</th>
+                <th>누적 자본</th>
+              </tr>
+            </thead>
+            <tbody id="monthlyTableBody">
+              <tr>
+                <td colspan="7" class="empty">데이터를 추가하면 월별 현황이 표시됩니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+      <div class="modal-panel">
+        <header>
+          <h3 id="settingsTitle">기본 설정</h3>
+          <button class="icon-btn" data-close-modal aria-label="설정 창 닫기">&times;</button>
+        </header>
+        <form id="settingsForm" class="form-grid">
+          <label>
+            초기 자본 (원)
+            <input name="initialCapital" type="number" min="0" step="1000" autocomplete="off" required />
+          </label>
+          <label>
+            월 고정 수입 (원)
+            <input name="fixedIncome" type="number" min="0" step="1000" autocomplete="off" required />
+          </label>
+          <button type="submit" class="btn btn-primary">저장</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="entryModal" role="dialog" aria-modal="true" aria-labelledby="entryTitle" hidden>
+      <div class="modal-panel">
+        <header>
+          <h3 id="entryTitle">수입/지출 입력</h3>
+          <button class="icon-btn" data-close-modal aria-label="입력 창 닫기">&times;</button>
+        </header>
+        <form id="entryForm" class="form-grid">
+          <label>
+            월
+            <input name="month" type="month" autocomplete="off" required />
+          </label>
+          <label>
+            구분
+            <select name="type" required>
+              <option value="extraIncome">추가 수입</option>
+              <option value="expense">지출</option>
+            </select>
+          </label>
+          <label>
+            항목명
+            <input name="label" type="text" maxlength="40" placeholder="예: 외주 수입, 식비…" autocomplete="off" required />
+          </label>
+          <label>
+            금액 (원)
+            <input name="amount" type="number" min="1" step="1000" autocomplete="off" required />
+          </label>
+          <button type="submit" class="btn btn-primary">기록 추가</button>
+        </form>
+        <div class="list-block">
+          <p>선택 월 내역</p>
+          <ul id="entryPreviewList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="monthModal" role="dialog" aria-modal="true" aria-labelledby="monthTitle" hidden>
+      <div class="modal-panel">
+        <header>
+          <h3 id="monthTitle">월 추가</h3>
+          <button class="icon-btn" data-close-modal aria-label="월 추가 창 닫기">&times;</button>
+        </header>
+        <form id="monthForm" class="form-grid">
+          <label>
+            추가할 월
+            <input name="month" type="month" autocomplete="off" required />
+          </label>
+          <button type="submit" class="btn btn-primary">월 생성</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="analysisModal" role="dialog" aria-modal="true" aria-labelledby="analysisTitle" hidden>
+      <div class="modal-panel wide">
+        <header>
+          <h3 id="analysisTitle">자본 흐름 분석</h3>
+          <button class="icon-btn" data-close-modal aria-label="분석 창 닫기">&times;</button>
+        </header>
+        <p class="analysis-note">
+          월 성장률 = (해당 월 잉여 자본 / 해당 월 시작 자본) × 100
+        </p>
+        <div id="growthBars" class="bars"></div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
