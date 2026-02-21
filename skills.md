@@ -1,5 +1,10 @@
 # skills.md
 
+## Document-First Policy (우선순위 규칙)
+- `Plan.md`가 이 프로젝트의 최우선 기준이다.
+- `skills.md`는 구현 규칙/스타일 가이드 역할을 하며, `Plan.md`와 충돌하면 `Plan.md`를 따른다.
+- 새로운 요구가 들어오면 UI 구현보다 먼저 `Plan.md` 업데이트 + 승인 과정을 거친다.
+
 ## Design Direction (Groove-style 기반)
 
 이 웹사이트는 다음 스타일을 따른다.
