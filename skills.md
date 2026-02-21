@@ -1,24 +1,43 @@
 # skills.md
 
-## Required Skills
-본 에이전트는 아래 2개 스킬을 사용한다.
-- [$web-design-guidelines](/Users/sunwoo/.agents/skills/web-design-guidelines/SKILL.md)
-- [$frontend-design](/Users/sunwoo/.agents/skills/frontend-design/SKILL.md)
+## Design Direction (Groove-style 기반)
 
-## Skill Usage Policy
-1. 기획 완료 후 UI 구현 단계에서 `$frontend-design`을 기본 제작 프레임으로 사용한다.
-2. 구현 결과 점검 단계에서 `$web-design-guidelines`를 적용해 UI/UX/접근성/일관성을 리뷰한다.
+이 웹사이트는 다음 스타일을 따른다.
 
-## Design Direction
-- 웹사이트는 **미니멀하고 심플한 방향**을 기본 원칙으로 한다.
-- 정보 계층은 얕고 명확해야 하며, 첫 화면은 핵심 메시지 중심으로 구성한다.
-- 웹사이트의 데이터 입력은 반드시 **실시간 저장(auto-save)** 방식이어야 한다.
-- 별도의 저장 버튼 없이, 사용자가 입력하는 즉시 상태와 화면이 업데이트되어야 한다.
+### 1. Layout
+- Full-width 레이아웃
+- 중앙 정렬 기반 콘텐츠
+- 섹션 간 충분한 vertical spacing (최소 120px 이상)
+- 카드 남용 금지
 
-## Function Handling Rule
-- 사용자가 요청하는 부가 기능(Function)은 메인 페이지 내부에서 **별도 창(overlay/modal/new panel)** 형태로 열어 제공한다.
-- 목적은 메인 페이지를 최대한 심플하고 미니멀하게 유지하는 것이다.
-- 메인 레이아웃은 핵심 컨텐츠 중심, 부가 기능은 분리 노출을 원칙으로 한다.
-- 새로운 창은 반드시 메인 페이지에서 사용자가 원할 때만 열려야 한다.
-- 예: 사용자가 `학습 시작` 같은 명시적 트리거를 눌렀을 때만 새로운 창을 연다.
-- 열린 창은 사용자가 `x` 버튼으로 언제든 닫을 수 있어야 한다.
+### 2. Typography
+- 메인 타이틀은 48px~72px
+- 볼드체 사용
+- 줄 길이는 60~75 characters 유지
+- 문장은 짧고 강하게 작성
+
+### 3. Color System
+- 기본은 화이트/라이트 배경
+- 블랙 텍스트
+- 포인트 컬러 1개만 사용
+- 그라데이션 남용 금지
+
+### 4. Interaction
+- 부드러운 스크롤 애니메이션
+- 버튼 hover는 subtle한 변화
+- 과도한 모션 금지
+
+### 5. Information Hierarchy
+- 한 화면에는 하나의 메시지만 강조
+- 동시 강조 요소 2개 이상 금지
+- 버튼은 섹션당 최대 1~2개
+
+## UI Quality Checklist
+
+구현 후 반드시 아래를 점검한다:
+
+- 첫 화면에서 메시지가 3초 안에 이해되는가?
+- 텍스트가 과도하게 많지 않은가?
+- 시각적 무게 중심이 한 곳에 있는가?
+- 버튼이 3개 이상 동시에 노출되지 않았는가?
+- 여백이 충분한가?
