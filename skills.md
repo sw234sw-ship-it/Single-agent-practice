@@ -5,6 +5,34 @@
 - `skills.md`는 구현 규칙/스타일 가이드 역할을 하며, `Plan.md`와 충돌하면 `Plan.md`를 따른다.
 - 새로운 요구가 들어오면 UI 구현보다 먼저 `Plan.md` 업데이트 + 승인 과정을 거친다.
 
+## Required Skills
+본 에이전트는 아래 3개 스킬을 사용한다.
+
+- [$vercel-react-best-practices](~/.agents/skills/vercel-react-best-practices/SKILL.md)
+- [$web-design-guidelines](~/.agents/skills/web-design-guidelines/SKILL.md)
+- [$frontend-design](~/.agents/skills/frontend-design/SKILL.md)
+
+## Skill Usage Policy
+
+1. 구조 및 코드 품질 구현 단계에서는 `$vercel-react-best-practices`를 따른다.
+   - 컴포넌트 구조
+   - 상태 관리
+   - 폴더 구조
+   - React 패턴
+
+2. UI 시각적 표현 및 감성 설계는 `$frontend-design`을 따른다.
+   - 레이아웃 구성
+   - 히어로 구조
+   - 타이포그래피
+   - 간격/여백
+   - 인터랙션 방향
+
+3. 최종 점검 단계에서 `$web-design-guidelines`로 검수한다.
+   - 접근성
+   - 일관성
+   - UX 흐름
+   - 시각적 위계
+
 ## Design Direction (Groove-style 기반)
 
 이 웹사이트는 다음 스타일을 따른다.
