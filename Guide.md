@@ -94,3 +94,20 @@
 
 기획 → 승인 → 문서 생성 → 구현
 순서를 절대 변경하지 않는다.
+
+## Post-Implementation Discipline
+
+구현 완료 후에는 반드시 Agent.md의
+- Checklist Execution Engine
+- Change Logging Protocol
+- Quality Inspection Loop
+를 수행한다.
+
+## Next
+- [ ]
+
+## Done
+- [x]
+
+## Backlog
+- [ ]
